@@ -20,7 +20,10 @@ app.use('/api/tasks',taskRouter);
 app.use('/api/dashboard',dashboardRouter);
 
 
-connectDB().then(()=>{app.listen(3000,()=>{
-    console.log("collabkart server started successfully")
-})
+const PORT = process.env.PORT || 3000;
+
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`collabkart server started successfully on port ${PORT}`)
+  })
 })
