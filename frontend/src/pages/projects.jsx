@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000'
+
 function Projects() {
   const [projects, setProjects] = useState([])
   const [name, setName] = useState('')
@@ -15,7 +17,7 @@ function Projects() {
 
   const fetchProjects = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/api/projects', {
+      const res = await axios.get(`${API_BASE}/api/projects`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       setProjects(res.data)
@@ -26,7 +28,7 @@ function Projects() {
 
   const createProject = async () => {
     try {
-      await axios.post('http://localhost:3000/api/projects/create',
+      await axios.post(`${API_BASE}/api/projects/create`,
         { name, description },
         { headers: { Authorization: `Bearer ${token}` } }
       )

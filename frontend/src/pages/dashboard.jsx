@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000'
+
 function Dashboard() {
   const [stats, setStats] = useState(null)
   const navigate = useNavigate()
@@ -13,7 +15,7 @@ function Dashboard() {
 
   const fetchStats = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/api/dashboard', {
+      const res = await axios.get(`${API_BASE}/api/dashboard`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       setStats(res.data)
